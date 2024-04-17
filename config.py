@@ -7,7 +7,7 @@ Configuration options for the project2 package
 
 import os
 #import toolkit_config as tcfg
-
+import json
 ROOTDIR = os.path.dirname(os.path.abspath(__file__))
 
 #ROOTDIR = os.path.join(tcfg.PRJDIR, 'project2')
