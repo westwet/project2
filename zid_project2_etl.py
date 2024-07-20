@@ -103,8 +103,8 @@ def read_prc_csv(tic, start, end, prc_col='Adj Close'):
     """
 
     # <COMPLETE THIS PART>
-    tic = tic.lower() + '_prc.csv'# 文件名
-    path = os.path.join(cfg.DATADIR,tic)
+    tic_file = tic.lower() + '_prc.csv'# 文件名
+    path = os.path.join(cfg.DATADIR,tic_file)
     #path = cfg.DATADIR + '\\' + tic
     df = pd.read_csv(path, index_col='Date') # 读文件
     df.index = pd.to_datetime(df.index) # 把索引转换成日期型
@@ -112,6 +112,7 @@ def read_prc_csv(tic, start, end, prc_col='Adj Close'):
     df = df.sort_index(ascending=True)
     return_df = df.loc[(df.index>=start) & (df.index<=end)][prc_col]
     return_df = return_df.dropna()
+    return_df = return_df.rename(tic.lower())
     return return_df
 
 # ----------------------------------------------------------------------------
@@ -525,7 +526,7 @@ def _test_aj_ret_dict(tickers, start, end):
 if __name__ == "__main__":
     pass
     # #test read_prc_csv function
-    #_test_read_prc_csv()
+    _test_read_prc_csv()
 
     # # use made-up series to test daily_return_cal function
     #_test_daily_return_cal()
@@ -539,5 +540,5 @@ if __name__ == "__main__":
     # ser_price = read_prc_csv(tic='AAPL', start='2020-08-31', end='2021-01-10')
     # _test_monthly_return_cal(made_up_data=False, ser_prc=ser_price)
     # # test aj_ret_dict function
-    _test_aj_ret_dict(['AAPL', 'TSLA'], start='2010-06-25', end='2010-08-05')
+    # _test_aj_ret_dict(['AAPL', 'TSLA'], start='2010-06-25', end='2010-08-05')
 
